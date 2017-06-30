@@ -1,0 +1,94 @@
+//color define
+$black:                 #000;
+$grayDarker:            #222;
+$grayDark:              #3d3e4f;//cc
+$gray:                  #555;
+$gray2:                 #676976;//cc
+$grayLight:             #909090;
+$grayLightMod:          #b7b8c4;//cc
+$grayLight2:            #BBB;
+$grayLight3:            #B5B5B5;
+$grayLight4:            #dfe1e7;//cc
+$grayLighter:           #eee;
+$grayLighter2:          #efeff3;//cc
+$white:                 #fff;
+$orange:                #f60;
+
+// global style
+$bodyBackground:        $white;
+$textColor:             $gray;
+// Links
+$linkColor:             #3399e0;
+$linkColorHover:        darken($linkColor, 15%);
+
+
+// Tables
+// -------------------------
+//$tableBackground:                   transparent; // overall background-color
+//$tableBackgroundAccent:             #f9f9f9; // for striping
+//$tableBackgroundHover:              #f5f5f5; // for hover
+//$tableBorder:                       #ddd; // table and cell border
+
+// Buttons
+// -------------------------
+$btnBackground:                     $white;
+$btnBackgroundHighlight:            darken($white, 10%);
+$btnBorder:                         #bbb;
+
+$btnPrimaryBackground:              $linkColor;
+$btnPrimaryBackgroundHighlight:     spin($btnPrimaryBackground, 20%);
+
+$btnInfoBackground:                 #5bc0de;
+$btnInfoBackgroundHighlight:        #2f96b4;
+
+$btnSuccessBackground:              #62c462;
+$btnSuccessBackgroundHighlight:     #51a351;
+
+$btnPayBackground:                  lighten($orange, 15%);
+$btnPayBackgroundHighlight:         $orange;
+
+$btnDangerBackground:               #ee5f5b;
+$btnDangerBackgroundHighlight:      #bd362f;
+
+$btnInverseBackground:              #444;
+$btnInverseBackgroundHighlight:     $grayDarker;
+
+
+//PC Colors as of starting 2017-07-22
+//---------main brand colors ------------------
+$primaryColor:          #FF9944;//cc
+$secondaryColor:        #ff6c00;//cc
+
+$paymentColor:          $orange;
+$membershipColor:       #bda66a;
+
+//App v5.0 colors
+$moduleBackgroundColor:             $white;
+$linkColor:                         $primaryColor;
+$linkColorActive:                   $secondaryColor;
+$appBackgroundColor:                #E6E6E6;
+
+//---------text colors ------------------------
+$titleColor:            $grayDark;
+$textColor2:             #898B9A;
+$secondaryTitleColor:   $gray2;
+$tipColor:              $grayLightMod;
+$secondaryTipColor:     $grayLight4;
+$borderColor:           $grayLighter2;
+
+$pcLinkColor:           $secondaryColor;//cc type-----?
+$pcLinkHoverColor:      #ff8c1b;
+$pcLinkActiveColor:     #e66100;
+
+//---------layout colors ----------------------
+$backgroundColorV2:     #f7f7f9;//cc
+$panelBackgroundColor:  $white;
+
+$warningColor:          #FFD423;//cc
+$successColor:          #7ED321;
+$dangerColor:           #FF5843;//cc
+
+
+//---------20171.20  cc---------------------
+$secondColorBlue:  #60c3d4;
+$secondColorPurple:     #735ac9;

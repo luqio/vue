@@ -1,0 +1,721 @@
+@font-face {
+    font-family: 'iconfont';
+    src: cdnurl('../../img/font/iconfont.eot');
+    src: cdnurl('../../img/font/iconfont.eot?#iefix') format('eot'), /* IE6-IE8 */ 
+         cdnurl('../../img/font/iconfont.woff') format('woff'),
+         cdnurl('../../img/font/iconfont.ttf') format('truetype'),
+         cdnurl('../../img/font/iconfont.svg#iconfont') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.yk-icon-base-pseudo--iconfont {
+    font-family: 'iconfont';
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    text-transform: none;
+    display: inline-block;
+
+}
+
+.yk-icon__check-2 {
+    font-family: 'iconfont';
+    &:before {
+        content: '\e63c';
+        display: inline-block;
+    }
+}
+
+.yk-icon__plus {
+    font-family: 'iconfont';
+    &:before {
+        content: '\e622';
+        display: inline-block;
+    }
+}
+
+.yk-icon__siliao {
+    font-family: 'iconfont';
+    &:before {
+        content: '\e62d';
+        display: inline-block;
+    }
+}
+
+
+@font-face {
+    font-family: "youkuMobile";
+    src: cdnurl('/lib/img/font/youku_mobile.eot');
+    src: cdnurl('/lib/img/font/youku_mobile.eot?#iefix') format('eot'),
+        cdnurl('/lib/img/font/youku_mobile.woff') format('woff'),
+        cdnurl('/lib/img/font/youku_mobile.ttf') format('truetype'),
+        cdnurl('/lib/img/font/youku_mobile.svg#youkuMobile') format('svg');
+}
+
+.yk-icon-base-pseudo {
+    font-family: "youkuMobile";
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    text-transform: none;
+    display: inline-block;
+}
+
+@mixin yk-icon-char($filename) {
+    
+    $arrow: "\E600";
+    
+    $play: "\E601";
+    
+    $read: "\E602";
+    
+    $comment: "\E603";
+    
+    $share: "\E604";
+    
+    $alert: "\E605";
+    
+    $cross: "\E606";
+    
+    $star: "\E607";
+    
+    $star--outline: "\E608";
+    
+    $check: "\E609";
+    
+    $write: "\E60A";
+    
+    $all-update: "\E60B";
+    
+    $write2: "\E60C";
+    
+    $delete: "\E60D";
+    
+    $write3: "\E60E";
+    
+    $picture: "\E60F";
+    
+    $audio: "\E700";
+    
+    $video: "\E701";
+    
+    $article: "\E702";
+    
+    $triangle-up: "\E703";
+    
+    $triangle-down: "\E704";
+    
+    $alert--triangle: "\E705";
+    
+    $error--round: "\E706";
+    
+    $success--round: "\E707";
+    
+    $menu: "\E708";
+    
+    $paper-plane: "\E709";
+    
+    $alert--donut--outline: "\E70A";
+    
+    $dot: "\E70B";
+    
+    $paper-plane-2: "\E70C";
+    
+    $arrow--left: "\E70D";
+    
+    $hot: "\E70E";
+    
+    $thumbup: "\E70F";
+    
+    $wait: "\E710";
+    
+    $gear: "\E711";
+    
+    $broadcast: "\E712";
+    
+    $upload: "\E713";
+    
+    $circle: "\E714";
+    
+    $search: "\E715";
+    
+    $user: "\E716";
+    
+    $question--donut--outline: "\E717";
+    
+    $write4: "\E718";
+    
+    $allstar--donut: "\E719";
+    
+    $album: "\E71A";
+    
+    $gift: "\E71B";
+    
+    $broadcast--donut: "\E71C";
+    
+    $article--donut: "\E71D";
+    
+    $add: "\E71E";
+    
+    $mic--donut: "\E71F";
+    
+    $menu--line: "\E720";
+    
+    $comment--donut: "\E721";
+    
+    $handstar--donut: "\E722";
+    
+    $profile: "\E723";
+    
+    $rank: "\E724";
+    
+    $upload--donut: "\E725";
+    
+    $chat: "\E726";
+    
+    $store: "\E727";
+    
+    $donut: "\E728";
+    
+    $weibo: "\E729";
+    
+    $bee--donut: "\E72A";
+    
+    $weixin: "\E72B";
+    
+    $newbie--donut: "\E72C";
+    
+    $thumbup--donut: "\E72D";
+    
+    $album--donut: "\E72E";
+    
+    $info--round: "\E72F";
+    
+    $heart: "\E730";
+    
+    $gift2: "\E731";
+    
+    $notice: "\E732";
+    
+    $user2: "\E733";
+    
+    $support: "\E734";
+    
+    $feedback: "\E735";
+    
+    $community: "\E736";
+    
+    $contact: "\E737";
+    
+    $power: "\E738";
+    
+    $brodcast: "\E739";
+    
+    $heart--donut: "\E73A";
+    
+    $cart: "\E73B";
+    
+    $hand: "\E73C";
+    
+    $triangle-left: "\E73D";
+    
+    $triangle-right: "\E73E";
+    
+    $cart--ali: "\E73F";
+    
+    $refresh: "\E740";
+    
+    $success--donut--outline: "\E741";
+    
+    $clock: "\E742";
+    
+    $list: "\E743";
+    
+    $crown: "\E744";
+    
+    $upload2: "\E745";
+    
+    $play2: "\E746";
+    
+    $delete2: "\E747";
+    
+    $user3: "\E748";
+    
+    $clock2: "\E749";
+    
+    $search2: "\E74A";
+    
+    content: $filename;
+}
+
+@mixin yk-icon($filename, $insert: before) {
+    @content;
+    &:#{$insert} {
+        @include yk-icon-char($filename);
+        display: inline-block;
+    }
+}
+
+
+.yk-icon__arrow {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(arrow);
+}
+
+.yk-icon__play {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(play);
+}
+
+.yk-icon__read {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(read);
+}
+
+.yk-icon__comment {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(comment);
+}
+
+.yk-icon__share {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(share);
+}
+
+.yk-icon__alert {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(alert);
+}
+
+.yk-icon__cross {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(cross);
+}
+
+.yk-icon__star {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(star);
+}
+
+.yk-icon__star--outline {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(star--outline);
+}
+
+.yk-icon__check {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(check);
+}
+
+.yk-icon__write {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(write);
+}
+
+.yk-icon__all-update {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(all-update);
+}
+
+.yk-icon__write2 {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(write2);
+}
+
+.yk-icon__delete {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(delete);
+}
+
+.yk-icon__write3 {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(write3);
+}
+
+.yk-icon__picture {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(picture);
+}
+
+.yk-icon__audio {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(audio);
+}
+
+.yk-icon__video {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(video);
+}
+
+.yk-icon__article {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(article);
+}
+
+.yk-icon__triangle-up {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(triangle-up);
+}
+
+.yk-icon__triangle-down {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(triangle-down);
+}
+
+.yk-icon__alert--triangle {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(alert--triangle);
+}
+
+.yk-icon__error--round {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(error--round);
+}
+
+.yk-icon__success--round {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(success--round);
+}
+
+.yk-icon__menu {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(menu);
+}
+
+.yk-icon__paper-plane {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(paper-plane);
+}
+
+.yk-icon__alert--donut--outline {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(alert--donut--outline);
+}
+
+.yk-icon__dot {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(dot);
+}
+
+.yk-icon__paper-plane-2 {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(paper-plane-2);
+}
+
+.yk-icon__arrow--left {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(arrow--left);
+}
+
+.yk-icon__hot {
+    @extend .yk-icon-base-pseudo;
+@include yk-icon(hot);
+}
+
+.yk-icon__thumbup {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(thumbup);
+}
+
+.yk-icon__wait {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(wait);
+}
+
+.yk-icon__gear {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(gear);
+}
+
+.yk-icon__broadcast {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(broadcast);
+}
+
+.yk-icon__upload {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(upload);
+}
+
+.yk-icon__circle {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(circle);
+}
+
+.yk-icon__search {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(search);
+}
+
+.yk-icon__user {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(user);
+}
+
+.yk-icon__question--donut--outline {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(question--donut--outline);
+}
+
+.yk-icon__write4 {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(write4);
+}
+
+.yk-icon__allstar--donut {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(allstar--donut);
+}
+
+.yk-icon__album {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(album);
+}
+
+.yk-icon__gift {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(gift);
+}
+
+.yk-icon__broadcast--donut {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(broadcast--donut);
+}
+
+.yk-icon__article--donut {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(article--donut);
+}
+
+.yk-icon__add {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(add);
+}
+
+.yk-icon__mic--donut {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(mic--donut);
+}
+
+.yk-icon__menu--line {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(menu--line);
+}
+
+.yk-icon__comment--donut {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(comment--donut);
+}
+
+.yk-icon__handstar--donut {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(handstar--donut);
+}
+
+.yk-icon__profile {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(profile);
+}
+
+.yk-icon__rank {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(rank);
+}
+
+.yk-icon__upload--donut {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(upload--donut);
+}
+
+.yk-icon__chat {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(chat);
+}
+
+.yk-icon__store {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(store);
+}
+
+.yk-icon__donut {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(donut);
+}
+
+.yk-icon__weibo {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(weibo);
+}
+
+.yk-icon__bee--donut {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(bee--donut);
+}
+
+.yk-icon__weixin {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(weixin);
+}
+
+.yk-icon__newbie--donut {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(newbie--donut);
+}
+
+.yk-icon__thumbup--donut {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(thumbup--donut);
+}
+
+.yk-icon__album--donut {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(album--donut);
+}
+
+.yk-icon__info--round {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(info--round);
+}
+
+.yk-icon__heart {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(heart);
+}
+
+.yk-icon__gift2 {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(gift2);
+}
+
+.yk-icon__notice {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(notice);
+}
+
+.yk-icon__user2 {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(user2);
+}
+
+.yk-icon__support {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(support);
+}
+
+.yk-icon__feedback {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(feedback);
+}
+
+.yk-icon__community {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(community);
+}
+
+.yk-icon__contact {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(contact);
+}
+
+.yk-icon__power {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(power);
+}
+
+.yk-icon__brodcast {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(brodcast);
+}
+
+.yk-icon__heart--donut {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(heart--donut);
+}
+
+.yk-icon__cart {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(cart);
+}
+
+.yk-icon__hand {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(hand);
+}
+
+.yk-icon__triangle-left {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(triangle-left);
+}
+
+.yk-icon__triangle-right {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(triangle-right);
+}
+
+.yk-icon__cart--ali {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(cart--ali);
+}
+
+.yk-icon__refresh {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(refresh);
+}
+
+.yk-icon__success--donut--outline {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(success--donut--outline);
+}
+
+.yk-icon__clock {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(clock);
+}
+
+.yk-icon__list {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(list);
+}
+
+.yk-icon__crown {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(crown);
+}
+
+.yk-icon__upload2 {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(upload2);
+}
+
+.yk-icon__play2 {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(play2);
+}
+
+.yk-icon__delete2 {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(delete2);
+}
+
+.yk-icon__user3 {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(user3);
+}
+
+.yk-icon__clock2 {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(clock2);
+}
+
+.yk-icon__search2 {
+    @extend .yk-icon-base-pseudo;
+    @include yk-icon(search2);
+}
+

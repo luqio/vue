@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript">
+        A.on = function (dom, type, fn) {
+            if(document.addEventListner){
+                dom.addEventListner(type, fn);
+            }else if(document.attachEvent){
+                dom.attachEvent("on"+type, fn);
+            }else{
+                dom.['on'+type]=fn;
+            }
+        }
+
+        A.on = function (dom, type, fn) {
+            if(document.addEventListner){
+                return dom.addEventListner(type, fn);
+            }else if(document.attachEvent){
+                return dom.attachEvent("on"+type, fn);
+            }else{
+                return dom.['on'+type]=fn;
+            }
+        }();
+
+        A.on = function (dom, type, fn) {
+            if(document.addEventListner){
+                A.on = dom.addEventListner(type, fn);
+            }else if(document.attachEvent){
+                A.on = dom.attachEvent("on"+type, fn);
+            }else{
+                A.on = dom.['on'+type]=fn;
+            }
+            A.on(dom, type, fn);
+        }();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

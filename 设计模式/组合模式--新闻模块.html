@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+   <div id="input">click me</div>
+</body>
+<script type="text/javascript">
+    function inheritObject(o){function F(){} F.prototype = o; return new F()}
+    function inheritPrototype(subclass, superclass){
+        var p = inheritObject(superclass);
+        p.constructor = subclass;
+        subclass.prototype = p;
+
+    }
+    var News = function(){
+        this.children = [];
+        this.element = null;
+    }
+    News.prototype= {
+        init: function(){
+            throw newError("请重写你的方法");
+        },
+        add: function(){
+            throw newError("请重写你的方法");
+        },
+        getElement: function(){
+            throw newError("请重写你的方法");
+        }
+    }
+    var container = function(id, parent){
+        News.call(this);
+        this.id = id;
+        this.parent = parent;
+    }
+    inheritPrototype(container, News);
+    container.prototype.init = function(){
+        this.element = document.createElement('ul');
+        this.element.id = this.id;
+        this.element.className = 'new-container';
+    }
+    container.prototype.add = function(child){
+        this.children.push(child);
+        this.element.appendChild(child.getElement());
+        return this;
+    }
+    container.prototype.getElement = function(){
+        return this.element;
+    }
+    container.prototype.show = function(){
+        this.parent.appendChild(this.element);
+    }
+
+    var item = function(classname){
+        News.call(this);
+        this.classname = classname || '';
+        this.init();
+    }
+    inheritPrototype(item, News);
+    item.prototype.init = function(){
+        this.element = document.createElement('li');
+        this.element.className = this.classname;
+    }
+    item.prototype.add = function(child){
+        this.children.push(child);
+        this.element.push(child.getElement())
+        return this;
+    }
+    item.prototype.getElement = function(){
+        return this.element;
+    }
+
+    var NewsGroup = function(classname){
+        News.call(this);
+        this.classname = classname || '';
+        this.init();
+    }
+    inheritPrototype(NewsGroup, News);
+    NewsGroup.prototype.init = function(){
+        this.element = document.createElement('div');
+        this.element.className = this.classname;
+    }
+    NewsGroup.prototype.add = function(child){
+        this.children.push(child);
+        this.element.appendChild(child.getElement());
+        return this;
+    }
+    NewsGroup.prototype.getElement = function(){
+        return this.element;
+    }
+
+    var imageNews = function(url, href, classname){
+        News.call(this);
+        this.url = url || '';
+        this.href = href || '#';
+        this.classname = classname || 'normal';
+        this.init();
+    }
+    inheritPrototype(imageNews, News);
+    imageNews.prototype.init = function(){
+        this.element = document.createElement('a');
+        var img = new Image();
+        img.src = this.url;
+        this.element.appendChild(img);
+        this.element.classname = 'Image-news' + this.classname;
+        this.element.href = this.href;
+    }
+    imageNews.prototype.add = function(){}
+    imageNews.prototype.getElement = function(){
+        this.element;
+    }
+</script>
+<script type="text/javascript">
+    var base = function(){
+        this.children = [];
+        this.element = null;
+    }
+    base.prototype = {
+        init: function(){
+            throw newError("请重写你的方法");
+        },
+        add: function(){
+            throw newError("请重写你的方法");
+        },
+        getElement: function(){
+            throw newError("请重写你的方法");
+        }
+    }
+    var formItem = function(id, parent){
+        base.call(this);
+        this.parent = parent;
+        this.id = id;
+        this.init();
+    }
+    inheritPrototype(formItem, base);
+    formItem.prototype.init = function(){
+        this.element = document.createElement('div');
+        this.element.id = this.id;
+    }
+    formItem.prototype.add = function(child){
+        this.children.push(child);
+        this.element.appendChild(child.getElement());
+        return this;
+    }
+    formItem.prototype.getElement = function(){
+        return this.element;
+    }
+    formItem.prototype.show = function(){
+        this.parent.appendChild(this.element);
+    }
+
+    var formsetItem = function(classname, name){
+        base.call(this);
+        this.name = name;
+        this.classname = classname;
+        this.init();
+    }
+    inheritPrototype(formsetItem, base);
+    formsetItem.prototype.init = function(){
+        this.element = document.createElement("div");
+        this.element.innerHTML = this.name;
+        this.classname = "formset "+this.classname;
+    }
+    formsetItem.prototype.add = function(child){
+        this.element.appendChild(child.getElement());
+        this.children.push(child);
+        return this;
+    }
+    formsetItem.prototype.getElement = function(){
+        return this.element;
+    }
+
+    var Group = function(){
+        base.call(this);
+        this.init();
+    }
+    inheritPrototype(Group, base);
+    Group.prototype.init = function(){
+        this.element = document.createElement("div");
+    }
+    Group.prototype.add = function(child){
+        this.element.appendChild(child.getElement());
+        this.children.push(child);
+        return this;
+    }
+    Group.prototype.getElement = function(){
+        return this.element;
+    }
+
+    var labelItem = function(text){
+        base.call(this);
+        this.text = text || "";
+        this.init();
+    }
+    inheritPrototype(labelItem, base);
+    labelItem.prototype.init = function(){
+        this.element = document.createElement("span");
+        this.element.innerHTML= this.text;
+    }
+    labelItem.prototype.add = function(){
+    }
+    labelItem.prototype.getElement = function(){
+        return this.element;
+    }
+
+    var form = new formItem('formitem', document.body);
+
+    form.add(new formsetItem('account', '账号').add(
+            new Group().add(
+                new labelItem('账户1')
+            ).add(
+                new labelItem('账户2')
+            )
+        ).add(
+            new Group().add(
+                new labelItem('密码1')
+            ).add(
+                new labelItem('密码2')
+            )
+        )).show();
+
+</script>
+</html>

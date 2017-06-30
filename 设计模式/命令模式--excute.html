@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+   
+</head>
+<body> 
+    <canvas id="myCanvas">your browser does not support the canvas tag </canvas>
+</body>
+<script type="text/javascript">
+var viewCommand = (function(){
+    var tpl = {
+        product: ['<div>', '<img src="{#src#}">', '<p>{#test#}</p>', '</div>'].join(''),
+        title: ['<div class="title">', '<div class="main">', '<h2>{#title#}</h2>', '<p>{#tips#}<p>', '</div>','</div>'].join('');
+    };
+    var Action = {
+        create: function(data, view){
+            if(data.length){
+                for(var i=0,len=data.length; i<len; i++){
+                    html+=formatString(tpl[view], data[i]);
+                }
+            }else{
+                html+=formatString(tpl[view], data);
+            }
+        },
+        display: function(container, data, view){
+            if(data){
+               this.create(data,view);
+            }
+            document.getElementById(container).innerHTML = html;
+            html = '';
+        }
+    }
+    return  function excute(msg){
+        msg.param = Object.prototype.toString.call(msg.param) === "[object Array]"? msg.param: [msg.param];
+        Action[msg.command].apply(Action, msg.param);//action内部调用的方法引用this,所以此处为保证作用域this执行传入Action
+    }
+})();
+viewCommand({
+    command: 'create',
+    param: [{src:'', text:''}, 'product']
+})
+
+
+//画图 canvas
+var canvasCommand = (function(){
+    var canvas=document.getElementById('myCanvas');
+    var ctx=canvas.getContext('2d');
+    var Action = {
+        fillStyle: function(c){
+            console.log(444);
+            ctx.fillStyle = c;
+        },
+        fillRect: function(x, y, width, height){
+            ctx.fillRect(x, y, width, height);
+        },
+        strokeStyle : function(c){  
+            ctx.strokeStyle = c;
+        },
+        beginPath: function(){
+            ctx.beginPath();
+        },
+        arc: function(x, y, r, begin, end, dir){
+            ctx.arc(x, y, r, begin, end, dir);
+        },
+        file: function(){
+            ctx.fill();
+        },
+        stroke: function(){
+            ctx.stroke();
+        }
+    }
+    return  {
+        excute: function (msg){
+            if(!msg){
+                return;
+            }
+            if(msg.length){
+                for(var i=0, len=msg.length; i<len; i++)
+                    arguments.callee(msg[i]);
+                    //callee放回正在执行的函数本身的引用，它是arguments的一个属性
+
+                    //caller
+                    var callerTest = function() {
+                        console.log(callerTest.caller) ;
+                    } ;
+                    function a() {
+                        callerTest();
+                    }
+                    a() ;//输出function a() {callerTest();}
+                    callerTest() ;//输出null 
+
+                    //1 这个属性只有当函数在执行时才有用
+                    //2 caller 返回一个调用当前函数的引用 如果是由顶层调用的话 则返回null 
+            }else{
+                msg.param = Object.prototype.toString.call(msg.param) === "[object Array]"? msg.param: [msg.param];
+                Action[msg.command].apply(Action, msg.param);//action内部调用的方法引用this,所以此处为保证作用域this执行传入Action
+            }
+        }
+    }
+})();
+canvasCommand.excute([
+{
+    command: 'fillStyle', param: 'red'
+},
+{
+    command: 'fillRect', param: [20,20,100,100]
+}])
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+</body>
+<script type="text/javascript">
+    function bindIEEvent(dom, type, fn, data){
+        var data = data||{};
+        dom.attachEvent(“on”+type, function(e){
+           Fn.call(dom, e, data);
+        })
+    }
+    //argments = Array.prototype.slice.call(argments,0)那就是把类数组对象转换成一个真正的数组
+    //items.shift()//
+    var class2type = {};
+    jQuery.each( "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " ),
+    function( i, name ) {
+        class2type[ "[object " + name + "]" ] = name.toLowerCase();
+    } );
+    var visitor= (function(){
+        return {
+            splice: function(){
+                var args = Array.prototype.splice.call(arguments, 1);
+                return Array.prototype.splice.call(arguments[0], args);
+            },
+            push: function(){
+                var len = arguments[0]||0;
+                var args = this.splice(arguments,1);
+                arguments[0].length = len + arguments.length-1;
+                return Array.prototype.push.call(arguments[0],args);
+            },
+            pop: function(){
+                return Array.prototype.pop.apply(arguments[0]);
+            },
+            type: function(obj){
+                if ( obj == null ) {
+                    return obj + "";
+                }
+                return typeof obj =="object" || typeof obj =="function"?class2type[Object.prototype.toString.call( obj )]||"object":typeof obj;
+            }
+        }
+    })
+</script>
+</html>

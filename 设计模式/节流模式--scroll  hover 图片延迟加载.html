@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+</body>
+<script type="text/javascript">
+    //节流器  对重复的业务逻辑进行节流控制，执行最后一次操作并取消其他操作，以提高性能
+    var Throttle = function(){
+        var isclear = arguments[0], fn;
+        if(typeof isclear === 'boolean'){
+            fn = arguments[1];
+            fn.__throttleID && clearTimeout(fn.__throttleID);
+        }else{
+            fn = isclear;
+            param = arguments[1];
+            var p = {
+                context: null,
+                args: [],
+                time: 300
+            };
+            arguments.callee(true, fn);//clearTimeout
+            fn.__throttleID = setTimeOut(function(){
+                fn.apply(p.context, p.args);
+            },p.time);//延迟执行fn
+        }
+    }
+
+    function moveScroll(){
+        var top = $(document).scrollTop();
+        $('#back').animate({top: top+300}, 400, 'easeOutCubic');
+    }
+    $(window).on('scroll', function(){
+        Throttle(moveScroll);
+    })
+
+
+    //延迟加载图片
+    //<img src="img/loading.gif" alt="" data-src="img/1.jpg">
+    function lazyLoad(id){
+        this.container = document.getElementById(id);
+        this.imgs = this.getImgs();
+        this.init();
+    }
+    lazyLoad.prototype = {
+        init: function(){},
+        getImgs: function(){
+            var arr = [];
+            var imgs = this.container.getElementByTagName('img');
+            for(var i=0, len=imgs.length; i<len; i++){
+                arr.push(img[i])
+            }
+            return arr;
+        },
+        update: function(){
+            if(!this.imgs.length){
+                return;
+            }
+            var i = this.imgs.length;
+            for(--i; i>=0; i--){
+                if(this.shouldShow[i]){
+                    this.imgs[i].src=this.imgs[i].getAttribute('data-src');
+                    this.imgs.splice(i, 1);
+                }
+            }
+        },
+        shouldShow: function(){
+            var img = this.imgs[i],
+            scrollTop = document.documentElement.scrollTop || document.body.scrollTop,
+            scrollBottom = scrollTop+document.documentElement.clientHeight;
+            imgTop = this.PageY(img);
+            imgBottom = imgTop+img.offsetHeight;
+            if(imgTop>scrollTop&&imgTop<scrollBottom || (imgBottom>scrollTop && imgBottom<scrollBottom)){
+                return true;
+            }
+            return false;
+        },
+        PageY: function(element){
+            if(element.offsetParent){
+                return element.offsetTop + this.PageY(element.offsetParent)
+            }else{
+                return element.offsetTop;
+            }
+        },
+        on: function(element, type, fn){
+
+        },
+        bindEvent: function(){
+            var that = this;
+            this.on(window,'resize', function(){
+                Throttle(that.update, {context: that});
+            })
+            this.on(window,'scroll', function(){
+                Throttle(that.update, {context: that});
+            })
+        }
+    };
+
+    //统计打包
+    var logPack = function(){
+        var data = [],
+        MaxNum = 10,
+        itemSplitStr = '|',
+        keyValueSplitStr = '*',
+        img = new Image();
+        function sendLog(){}
+        return function(param){
+            if(!param){
+                sendLog();
+                return;
+            }
+            data.push(param);
+            data.length >= MaxNum && sendLog();
+        }
+    }();
+
+    function sendLog(){
+        var logStr = '';
+        fireData = data.splice(0, MaxNum);
+        for(var i=0, len=fireData.length; i<len; i++){
+            logStr += 'log' +i + '=';
+            for(var j in fireData[i]){
+                logStr += j+keyValueSplitStr + fireData[i][j];
+                logStr += itemSplitStr;
+            }
+            logStr = logStr.replace(/\|$/, '')+'&';
+        }
+        logStr += 'logLength='+len;
+        img.src = 'a.gif?'+logStr;
+    }
+</script>
+</html>

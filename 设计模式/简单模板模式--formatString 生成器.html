@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript">
+        var A = A || A{};
+        A.root = document.getElementById('container');
+        A.strategy = {
+            'listPart': function (argument) {
+                tpl = A.view(['h2',"p","ul"]),
+                liTpl = A.formateString(A.view('li'), {li:A.view(['strong','span'])})
+            },
+            'codePart': function(){
+
+            }
+        }
+        A.view = function(name){
+            var v={}
+            if(object.prototype.toString.call(name) === "[object Array]"){
+                var tpl = "";
+                for(var i=0, len=name.length; i<len; i++){
+                    tpl+=arguments.callee(name[i]);
+                }
+                return tpl;
+            }
+            else{
+                 return v[name]? v[name]:('<'+name+'>{#'+name+'#}</'+name+">");
+    
+            }
+        }
+        A.formateString = function(){}
+    </script>
+</head>
+<body>
+
+</body>
+</html>

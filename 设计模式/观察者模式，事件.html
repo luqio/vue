@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+</body>
+<script type="text/javascript">
+//将观察者放入闭包中，当页面加载就立即执行
+var Observer = (function () {
+    //防止暴露被篡改，写成静态私有变量
+    var __message = {};
+    return {
+        regist:  function(type , fn){
+            if(typeof __message[type] === 'undefind'){
+                __message[type] = [fn];
+            }else{
+                __message[type].push(fn);
+            }
+        },
+        fire: function(type, args){
+            if(!__message[type]){
+                return;
+            }
+            var events = {
+                type: type,
+                args: args || {}
+            },
+            i=0,
+            len = __message[type].length;
+            for(;i<len;i++){
+                __message[type][i].call(this, events);
+            }
+        },
+        remove: function(type, fn){
+            if(__message[type] instanceof Array){
+                var i = __message[type].length-1;
+                for(; i>=0; i--){
+                    __message[type][i] === fn && __message[type].splice(i, 1);
+                }
+            }
+        }
+    }
+    // body...
+})();
+</script>
+
+</script>
+</html>

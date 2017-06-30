@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+</body>
+<script type="text/javascript">
+var sendData = function(data, dealType, dom){
+    //xhr简化版  ie另行处理   XHR对象的兼容写法
+    var xhr = new XMLHttpRequest();
+        url = 'get.php?mod=userinfo';
+    if(window.XMLHttpRequest){
+        xhr = new XMLHttpRequest();
+    }else{
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+
+    xhr.onload = function(event){
+        if((xhr.status >= 200 && xhr.status < 300)||xhr.status == 304){
+            dealData(xhr.responseText, dealType, dom);
+        }else{
+            //请求失败
+        }
+    }
+    // xhr.onreadystatechange = function(){
+    //    if(xhr.readyState === 4){
+    //     if(xhr.status == 200){
+    //       alert(xhr.responseText);
+    //     }
+    //   }
+    // }
+    //如果需要异步响应，需检查readystate属性  可取值： 0(UNSENT):未初始化。尚未调用open()方法
+    //1(OPENED):启动。已经调用open()方法，但尚未调用send()方法
+    //2(HEADERS_RECEIVED):发送。己经调用send()方法，且接收到头信息
+    //3(LOADING):接收。已经接收到部分响应主体信息
+    //4(DONE):完成。已经接收到全部响应数据，而且已经可以在客户端使用了
+
+    for(var i in data){
+        url += '&' + i + '=' + data[i];
+    }
+
+    //发送请求
+    //open()
+　　 //在使用XHR对象时，要调用的第一个方法是open()，它接受3个参数：要发送的请求的类型 ("get"、"post"等)、请求的URL和表示是否异步发送请求的布尔值
+
+    //xhr.open("get","example.php", false);
+
+　　//[注意]URL是相对于执行代码的当前页面，且只能向同一个域中使用相同端口和协议的URL发送请求。如果URL与启动请求的页面有任何差别，都会引发安全错误
+
+    //send()
+    //send()方法接收一个参数，即要作为请求主体发送的数据。调用send()方法后，请求被分派到服务器
+
+    //xhr.open("get", "example.txt", false);
+    //xhr.send(null);
+    xhr.open("get", url, true);
+    xhr.send(null);
+}
+var dealData=function(data, dealType, dom){
+    var dataType = Object.prototype.toString.call(data);
+    switch(dealType){
+        case 'sug':
+            if(dataType === "[object Array]"){
+                return createSug(data, dom);
+            }
+            if(dataType === '[object object]'){
+                var newData = [];
+                for(var i in data){
+                    newData.push(data[i]);
+                }
+                return createSug(newData, dom);
+            }
+            return createSug([data],dom);
+            break;
+        case 'validate':
+            return createValidateResult(data, dom);
+            break;
+    }
+}
+</script>
+</html>

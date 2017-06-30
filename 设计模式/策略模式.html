@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+</body>
+<script type="text/javascript">
+//创建一系列策略算法，每组算法处理的业务是相同的，只是处理过程或者处理的结果不一样，所以他们可以相互替代。继承和策略模式相比：继承的方法是被封装在类中，这样不利于算法的独立演化    优化分支判断语句的模式
+//表单验证
+var inputStrategy = function () {
+    var strategy = {
+        notNull: function(value){
+            return /\s+/.test(value)?'请输入内容':"";
+        },
+        number: function(value){
+            return /^[0-9]+(\.[0-9]+)?$/.test(value)?'':'请输入数字';
+        }
+    }
+    return{
+        check: function(type, value){
+            value = value.replace(/^\s+|\s+$/g, '');
+            return strategy[type]?strategy[type](value):'没有该类型的检测方法';
+        },
+        addStrategy: function(type, fn){
+            strategy[type] = fn;
+        }
+    }
+    // body...
+}
+</script>
+
+</script>
+</html>

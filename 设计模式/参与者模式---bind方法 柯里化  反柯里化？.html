@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+</body>
+<script type="text/javascript">
+//函数绑定和柯里化
+function bind(fn, context){
+    return function(){
+        return fn.apply(context, arguments);
+    }
+}
+
+//柯里化
+function curry(fn){
+    var Slice = [].slice,
+    args = Slice.call(arguments, 1);
+    return function(){
+                var addArgs = Slice.call(arguments),
+                allArgs = args.concat(addArgs);
+                return fn.apply(null, allArgs);
+            }
+}
+
+//反柯里化
+Function.prototype.uncurry = function(){
+    var that = this;
+    return function(){
+        return Function.prototype.call.apply(that, arguments);
+    }
+}
+var toString = Object.prototype.toString.uncurry();
+console.log(toString(function(){}));
+console.log(toString([]));
+var push = [].push.uncurry();
+var demoArr={};
+push(demoArr, '第一成员','第二成员')；
+console,log(demoArr);
+
+
+function add (num1, num2){
+    return num1+num2;
+}
+var add5 = curry(add, 5);
+add5(6)
+//传递自定义参数
+    if(Function.prototype.bind === undefined){
+        Function.prototype.bind = function(context){
+            var Slice = [].slice,
+            args = Slice.call(arguments, 1),
+            that = this;
+            return function(){
+                var addArgs = Slice.call(arguments),
+                allArgs = args.concat(addArgs);
+                return that.apply(context, allArgs);
+            }
+        }
+    }
+    var demoobj = {
+        title: "rrr"
+    }
+    function demofun(data, name){
+        console.log(this.title);
+        console.log(data);
+        console.log(name);
+    }
+
+    var fn = demofun.bind(demoobj,"test")
+    fn('hello');
+
+
+    function evenfun(test, event){
+        console.log(test);
+        console.log(evenfun);
+    }
+    var btn = "";
+    var fn = evenfun.bind(btn,"test2")
+    //btn.addEventListener("click", fn)
+</script>
+</html>

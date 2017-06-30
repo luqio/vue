@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+   <div id="btn_container">
+       <div id="btn">demo</div>
+   </div>
+</body>
+<script type="text/javascript">
+//减少内存消耗
+//委托父元素 预测未来  内存外泄  数据分发
+var g = function (id) {
+    return document.getElementById(id);
+}
+g('btn').onclick = function(){
+    g('btn') = null;//没有这句话ie会有内存泄漏的情况，但是一般标准浏览器不需要
+    g('btn_container').innerHTML = '触发了事件';
+}
+
+//所以采用委托的方式
+g('btn_container').onclick = function(e){
+    var target = e && e.target || window.event.srcElement;
+    if(target.id === 'btn'){
+        g('btn_container').innerHTML = '触发了事件';
+    }
+}
+</script>
+</html>

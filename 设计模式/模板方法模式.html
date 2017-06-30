@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+</body>
+<script type="text/javascript">
+//模板方法的核心在于对方法的重用，它将核心方法封装在基类中，让子类继承基类的方法，实现基类方法的共享。
+    //Alert   日后有什么集体的修改就可以修改基类了
+    var Alert = function(data){
+        if(!data)
+            return;
+        this.content = data.content;
+        this.panel = document.createElement('div');
+        this.contentNode = document.createElement('p');
+        this.closeBtn = document.createElement('b');
+        this.confirmBtn = document.createElement('span');
+        this.panel.closeName = 'alert';
+        this.closeBtn.className = "a-close";
+        this.confirmBtn.className = "a-confirm";
+        this.confirmBtn.innerHTML = data.confirm || '确认';
+        this.contentNode.innerHTML = this.content;
+        this.sucess = data.sucess || function(){};
+        this.fail = data.fail || function(){};
+    }
+    Alert.prototype = {
+        init: function(){
+
+        },
+        bindEvent: function(){
+
+        },
+        hide: function(){
+
+        },
+        show: function(){
+
+        }
+    };
+
+    var RightAlert = function(data){
+        Alert.call(this, data);
+        this.confirm.className = this.confirmBtn.className + ' right';
+    }
+    RightAlert.prototype = newAlert();
+
+    var TitleAlert = function(data){
+        Alert.call(this, data);
+        this.title = data.title;
+        this.titleNode = document.createElement('h3')；
+        this.titleNode.innerHTML = this.title;
+    }
+    TitleAlert.prototype = new Alert();
+    TitleAlert.prototype.init = function(){
+        this.panel.insertBefore(this.titleNode, this.panel.firstchild);
+        Alert.prototype.init.call(this);
+    }
+
+    //取消按钮的标题提示框
+    var CancelAlert = function(data){
+        TitleAlert.call(this, data);
+        this.cancel = data.cancel;
+        this.cancelBtn = document.createElement('span');
+        this.cancelBtn.className = 'cancel';
+        this.cancelBtn.innerHTML = this.cancel || '取消';
+    }
+    CancelAlert.prototype = new Alert();
+    CancelAlert.prototype.init = function(){
+        this.panel.insertBefore(this.titleNode, this.panel.firstchild);
+        Alert.prototype.init.call(this);
+    }
+
+
+    //模板方法创建多类导航
+    function formatString(str, data){
+        return str.replace(/\{#(\w+)#\}/g, function(match, key){
+            return typeof data[key] === undefined ? "" : data[key];
+        })
+    }
+    var Nav = function(data){
+        this.item = '<a href="{#href#}" title="{#title#"}>{#name#}</a>';
+        this.html = "";
+        for(var i=0,len=data.length; i<len; i++){
+            this.html +=formatString(this.item, data[i]);
+        }
+        return this.html;
+    }
+
+    var NumNav= function(data){
+        var tpl = '<b>{#num#}</b>';
+        for(var i = data.length-1; i>=0; i--){
+            data[i].name += data[i].name + formatString(tpl, data[i]);
+        }
+        return Nav.call(this, data);
+    }
+
+    var nav = document.getElementById('content');
+    nav.innerHTML = NumNav([
+    {
+        href: '',
+        title: '',
+        name: '',
+        num: 10
+    }
+        ])
+    }
+</script>
+
+</script>
+</html>

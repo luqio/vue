@@ -1,0 +1,98 @@
+@import '../base/effects.scss';
+@charset "utf-8";
+.qwindow {
+    z-index: 30000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    display: none;
+    opacity: 0;
+    visibility: visible;
+    transform: scale(.5);
+    transition: transform .2s 0s cubic-bezier(.24, .01, .82, 1), opacity .2s 0s ease-in-out, visibility .4s;
+
+    &.show {
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+        transition: transform .2s .04s cubic-bezier(.5, .01, .88, 1), opacity .2s .04s ease-in-out, visibility .24s;
+    }
+
+    .winbox {
+        z-index: 2;
+        position: relative;
+        border: 1px solid #cacaca;
+    }
+    .winbg {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background: #545454;
+        opacity: 0.2;
+        filter: alpha(opacity=20);
+        border-radius: 3px;
+        box-shadow: 0 0 5px #395680;
+    }
+    .winhead {
+        z-index: 2;
+        position: relative;
+        background: #fff;
+        .wintitle {
+            display: none;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 10px;
+            font-size: 14px;
+            color: #555;
+            font-weight: bold;
+            border-bottom: 1px solid #c5c5c5;
+            overflow: hidden;
+        }
+        .winclose {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: none;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            background: cdnurl("/lib/img/widget/window/ico_close.png") no-repeat 0 0;
+        }
+    }
+    .winbody {
+        z-index: 1;
+        position: relative;
+        background: #fff;
+        overflow: hidden;
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.qwindow_mask {
+    z-index: 30000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    background: #545454;
+    width: 100%;
+    height: 100%;
+    opacity: 0.50;
+    filter: alpha(opacity=50);
+    visibility: visible;
+    transform: scale(1);
+    opacity: 0;
+    transition: opacity .2s .2s linear;
+
+    &.show {
+        opacity: 0.5;
+        transition: opacity .12s 0s linear;
+    }
+}

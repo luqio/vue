@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+   <div id="input">click me</div>
+</body>
+<script type="text/javascript">
+var page = (function (argument) {
+    var cache = {};
+    return function(page, fn){
+        if(cache[page]){
+            showPage(page, cache[page]);
+        }else{
+            $.post('',{
+                page: page
+            }, function(res){
+                if(res.errNo == 0){
+                    showPage(page, res.data);
+                    cache[page] = res.data;
+                    fn && fn();
+                }
+            })
+        }
+    }
+})();
+</script>
+</html>

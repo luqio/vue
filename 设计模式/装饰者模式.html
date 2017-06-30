@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+   <div id="input">click me</div>
+</body>
+<script type="text/javascript">
+        document.getElementById('input').onclick = function(){
+            alert(444)
+        }
+        
+        var decorator = function(input, fn){
+            var input = document.getElementById('input');
+           if(typeof input.onclick === 'function'){
+              var oldclickfun = input.onclick;
+              input.onclick = function(){
+                oldclickfun();
+                fn();
+              }
+           }else{
+              input.onclick = fn();
+
+           }
+        }
+        decorator("input", function(){
+            alert(555)
+        })
+    </script>
+</html>

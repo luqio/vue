@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+   <div id="input">click me</div>
+</body>
+<script type="text/javascript">
+    var FlyWeight = (function () {
+        var created = [];
+        function create(){
+            var dom = document.createElement('div');
+            document.getElementById('container').append(dom);
+            created.push(dom);
+            return dom;
+        }
+        return {
+            getDiv: function(){
+                if(created.length < 5){
+                    return create();
+                }else{
+                    var div = created.shift();
+                    created.push(div);
+                    return div;
+                }
+            }
+        }
+    })();
+    var paper = 0,
+    num = 5,
+    len = article.length;
+    for(var i=0; i<len; i++){
+        if(article[i]){
+            FlyWeight.getDiv().innerHTML = article[i];
+        }
+    }
+    document.getElementById('next_page').onclick = function(){
+        if(article.length < 5){
+            return;
+        }
+        var n = ++paper*num%len,//获取当前页的第一条新闻索引
+        j=0;
+        for(;j<5; j++){
+            if(article[n+j]){
+                 FlyWeight.getDiv().innerHTML = article[n+j];
+            }else if(article[n+j-len]){
+                FlyWeight.getDiv().innerHTML = article[n+j-len];
+            }else{
+                FlyWeight.getDiv().innerHTML = "";
+            }
+        }
+    }
+</script>
+</html>

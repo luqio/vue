@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript">
+        function getEvent(event){
+            return event || window.event;
+        }
+        function getTarget(event){
+            var event = getEvent(event);
+            return event.target || event.srcElement;
+
+        }
+        function preventDefault(event){
+            var event = getEvent(event);
+            if(event.preventDefault){
+                event.preventDefault();
+            }else{
+                event.returnValue = false;
+            }
+        }
+        document.onclick = function(e){
+            preventDefault(e);
+            if(getTarget(e)!== document.getElementById("myinput")){
+                hideInputSug();
+            }
+        }
+
+
+
+        //addEventListner attachEvent
+        function addEvent(dom, type, fn){
+            if(dom.addEventListner){
+                dom.addEventListner(type,fn, false);
+            }else if(dom.attachEvent){
+                dom.attachEvent('on' + type, fn);
+            }else{
+                dom['on'+type] = fn;
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

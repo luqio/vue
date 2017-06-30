@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    var info = function(){this.name="inf11o"}
+    info.prototype.init = function(){console.log(777)}
+
+    var a = function(){this.name="lucy"}
+
+    var object = function(o) {
+        function F() {}
+        F.prototype = o;
+        return new F();
+    };
+    var InheritsUtil = {
+        inherits: function(subType, superType) {
+            var prototype = object(superType.prototype);
+            prototype.constructor = subType;
+            subType.prototype = prototype;
+            subType.superClass = superType.prototype;
+        }
+    };
+
+    InheritsUtil.inherits(a,info)
+
+    var info_qq = new info()
+    var a_qq = new a();
+</script>
+</html>
+

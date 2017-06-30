@@ -1,0 +1,247 @@
+@import 'common/window.scss';
+@import 'common/dialogue.scss';
+@import 'common/notice.creation.scss';
+/* jquery.Jcrop.min.css v0.9.12 (build:20130126) */
+.jcrop-holder{direction:ltr;text-align:left;}
+.jcrop-vline,.jcrop-hline{background:#FFF;font-size:0;position:absolute;}
+.jcrop-vline{height:100%;width:1px!important;}
+.jcrop-vline.right{right:0;}
+.jcrop-hline{height:1px!important;width:100%;}
+.jcrop-hline.bottom{bottom:0;}
+.jcrop-tracker{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;height:100%;width:100%;}
+.jcrop-handle{background-color:#333;border:1px #EEE solid;font-size:1px;height:7px;width:7px;}
+.jcrop-handle.ord-n{left:50%;margin-left:-4px;margin-top:-4px;top:0;}
+.jcrop-handle.ord-s{bottom:0;left:50%;margin-bottom:-4px;margin-left:-4px;}
+.jcrop-handle.ord-e{margin-right:-4px;margin-top:-4px;right:0;top:50%;}
+.jcrop-handle.ord-w{left:0;margin-left:-4px;margin-top:-4px;top:50%;}
+.jcrop-handle.ord-nw{left:0;margin-left:-4px;margin-top:-4px;top:0;}
+.jcrop-handle.ord-ne{margin-right:-4px;margin-top:-4px;right:0;top:0;}
+.jcrop-handle.ord-se{bottom:0;margin-bottom:-4px;margin-right:-4px;right:0;}
+.jcrop-handle.ord-sw{bottom:0;left:0;margin-bottom:-4px;margin-left:-4px;}
+.jcrop-dragbar.ord-n,.jcrop-dragbar.ord-s{height:7px;width:100%;}
+.jcrop-dragbar.ord-e,.jcrop-dragbar.ord-w{height:100%;width:7px;}
+.jcrop-dragbar.ord-n{margin-top:-4px;}
+.jcrop-dragbar.ord-s{bottom:0;margin-bottom:-4px;}
+.jcrop-dragbar.ord-e{margin-right:-4px;right:0;}
+.jcrop-dragbar.ord-w{margin-left:-4px;}
+.jcrop-light .jcrop-vline,.jcrop-light .jcrop-hline{background:#FFF;filter:alpha(opacity=70)!important;opacity:.70!important;}
+.jcrop-light .jcrop-handle{-moz-border-radius:3px;-webkit-border-radius:3px;background-color:#000;border-color:#FFF;border-radius:3px;}
+.jcrop-dark .jcrop-vline,.jcrop-dark .jcrop-hline{background:#000;filter:alpha(opacity=70)!important;opacity:.7!important;}
+.jcrop-dark .jcrop-handle{-moz-border-radius:3px;-webkit-border-radius:3px;background-color:#FFF;border-color:#000;border-radius:3px;}
+.solid-line .jcrop-vline,.solid-line .jcrop-hline{background:#FFF;}
+.jcrop-holder img,img.jcrop-preview{max-width:none;}
+
+body{
+  background: transparent url(../img/dd1w.jpg) 0 0 no-repeat;
+}
+@keyframes bounceInDown {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -3000px, 0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(0, 25px, 0);
+  }
+
+  75% {
+    transform: translate3d(0, -10px, 0);
+  }
+
+  90% {
+    transform: translate3d(0, 5px, 0);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+@keyframes bounceOutUp {
+  20% {
+    transform: translate3d(0, -10px, 0);
+  }
+
+  40%, 45% {
+    opacity: 1;
+    transform: translate3d(0, 20px, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, -2000px, 0);
+  }
+}
+
+.bounce-enter-active{
+    animation: bounceInDown  .5s;
+}
+.bounce-leave-active{
+    animation: bounceOutUp  .5s;
+}
+// .bounce-enter, .bounce-leave-active{
+//     opacity: 0;
+// }
+
+
+.fade-enter-active, .fade-leave-active{
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-active{
+    opacity: 0;
+}
+.imgupload-window.qwindow{
+  //有分隔线的header+content+footer
+  @extend .dialogue-window--simple__cutoff
+}
+
+//jcrop---end
+.imgUpLoadPlugin__form{
+    cursor:pointer;
+    width: 100%;
+    height: 100%;
+    margin:0px;
+    padding:0px;
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:2;
+    .imgUpLoadPlugin__form--input[type="file"]{
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        margin:0px;
+        padding:0px;
+        display:block;
+        border:0px;
+        outline: medium none;
+        position: absolute;
+        z-index:2;
+        filter:alpha(opacity=0);
+        -moz-opacity:0;
+        opacity:0; 
+        /* font-size:0px;*/
+        left:0px;
+        top:0px;
+        &.forie{
+            font-size:30px;
+        }
+        &.forChrom{
+           font-size:0px; 
+        }
+    }
+}
+
+.imgUpLoadPlugin__pop__reSelectBox{
+    overflow:hidden;
+    padding-top:20px;
+    .imgUpLoadPlugin__button--reSelect{
+        float:left;
+        position:relative;
+        overflow:hidden; 
+        margin-right:9px;
+        display:inline-block;
+        height:28px;
+        line-height:28px;
+        color:#555555;
+        text-align:center;
+        width:78px;
+        font-size:13px;
+        cursor:pointer;
+        background:#f4f7fa;
+        border:1px solid #d1d1d1;
+    }
+    span{
+       font-size:12px;
+       line-height:13px;
+       color:#868686;
+       float:left;
+       margin-top:13px;
+    }
+}
+
+.imgUpLoadPlugin__cropBox{
+    overflow:hidden;
+    margin-top:20px;
+    height:386px;
+    position:relative;
+    .imgUpLoadPlugin__cropBox--preview__pane{
+       display:block;
+       position:absolute;
+       z-index:2000;
+       top:0;
+       left:445px; 
+       background-color:#f6f6f6;
+       border:1px solid #d3d3d3;
+    }
+    .imgUpLoadPlugin__cropBox--preview__container{
+        overflow:hidden;
+        width:239px;
+    }
+}
+/*左侧*/
+.imgUpLoadPlugin__cropBox--targetBox.imgUpLoadPlugin__cropBox--targetBox-holder{
+    height:384px;
+    width:384px;
+    float:left;
+    position:relative
+}
+.imgUpLoadPlugin__cropBox--targetBox.imgUpLoadPlugin__cropBox--targetBox-holder .imgUpLoadPlugin__cropBox--targetBox__mox{
+    display:block;
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:100%;
+    z-index:0;
+    background:#f6f6f6;
+    border:1px solid #d3d3d3; 
+ /*
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    opacity:0.5;*/
+}
+
+/*不需要裁剪*/
+.imgUpLoadPlugin__cropBox--targetBox.notNeedCrop{
+    line-height:386px;
+    vertical-align: middle; 
+    img{
+      max-width: 715px; 
+      max-height: 385px;
+    }
+}
+
+
+
+//loading
+.imgUpLoadPlugin--loadingImg{
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    margin-top: -40px;
+    margin-left: -20px;
+}
+//error tip
+.notice{
+    z-index: 99999;
+}
+
+.dialogue-window--simple__cutoff .winbody{
+  text-align: center;
+  .dialogue-window__content{
+    padding: 0px 40px 20px 40px;
+  }
+}
+.dialogue-window__footer{
+    font-size: 0px;
+    button{
+        margin-right: 20px;
+    }
+}

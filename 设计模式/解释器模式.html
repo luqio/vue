@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+
+<span style="font-family:Microsoft YaHei;font-size:10px;"></span>
+<div class="wrap" id="wrap" onclick="">
+    <div class="a"><span class="b">233</span></div>
+</div>
+<div id="body">
+    <div id="box1" class="box1">
+        <div id="box2" class="box2">
+            <span id="span">This is a span.</span>
+        </div>
+    </div>
+</div>
+
+<div id="l1">
+  <div id="l2">但事实上</div>
+</div>
+
+</body>
+<script type="text/javascript">
+    // function clickfun(e){
+    //     console.log(e.currentTarget);
+    //     return false;
+    // }
+    // document.getElementById("wrap").addEventListener("click",function(e){
+        
+    // })
+
+    window.onload = function() {
+        var len = document.getElementsByTagName("div").length, i=0;
+        for(; i<len; i++){
+            document.getElementsByTagName("div")[i].addEventListener("click",eventHandler, false);
+        }
+    }
+    function eventHandler(event) {
+        var target = event && event.target || window.event.srcElement;
+        console.log(target);
+        console.log("时间："+new Date(event.timeStamp)+" 产生事件的节点：" + event.target.id +"  当前节点："+event.currentTarget.id);
+    }
+
+    var l1 = document.getElementById('l1'), l2 = document.getElementById('l2');
+    l1.addEventListener('click', function(){ console.log('l1 capture')}, true);
+    l1.addEventListener('click', function(){ console.log('l1 bubbling')});
+    l2.addEventListener('click', function(){ console.log('l2 target')});
+    l2.addEventListener('click', function(){ console.log('l2 target, invalid capture')}, true);
+    //为元素l1添加了一个捕获阶段的处理函数l1 captured，一个冒泡阶段的处理函数l1 bubbling。为l2添加了一个目标阶段的事件处理函数
+    //l2 target, invalid capture设置了捕获，但因为当前对象就是目标对象，捕获无效。该函数仍然作用于目标阶段。 既然捕获失效，那么它的执行顺序就按照注册事件的顺序了，不会因为它设置了无效的捕获而提前得到执行。
+
+    //target.DispatchEvent(event)也是DOM Level 2 Event提供的方法。用来从target开始分发事件event。 例如，我们可以创建一个clickDOM事件：
+    var event = new MouseEvent('click', {
+      view: window,
+      bubbles: true,
+      cancelable: true
+    });
+    l2.dispatchEvent(event);//遇上面一样的效果
+
+    //如果用l1来dispatchEvent会怎样？
+    //因为l1确实拥有子元素，所以事件仍然会下行和冒泡。但事件的target并非l2，所以l2不会触发目标阶段的事件处理函数
+    // 结果：l1 capture
+    // l1 bubbling
+
+
+
+    var interpreter = (function(){
+        function getsiblingName(node){
+            if(node.previousSibling){
+                var name = '',
+                count = 1,
+                nodename = node.nodeName,
+                sibling = node.previousSibling;
+                while(sibling){
+                    if(sibling.nodeType === 1 && sibling.nodeType === node.nodeType && sibling.nodeName){
+                        if(nodename == sibling.nodeName){
+                            name += ++count;
+                        }else{
+                            count = 1;
+                            name += '|' +sibling.nodeName.toUpperCase();
+                        }
+                    }
+                    sibling = sibling.previousSibling;
+                }
+                return name;
+            }else{
+                return '';
+            }
+        }
+        return function(node, wrap){
+            var path = [];
+            var wrap = wrap || document;
+            if(node === wrap){
+                if(wrap.nodeType == 1){
+                    path.push(wrap.nodeName.toUpperCase());
+                }
+                return path;
+            }
+            if(node.parentNode !== wrap){
+                path = arguments.callee(node.parentNode, wrap);
+                console.log('argument')
+            }else{
+                if(wrap.nodeType == 1){
+                    path.push(wrap.nodeName.toUpperCase());
+                }
+            }
+            var sublingsName = getsiblingName(node);
+            if(node.nodeType == 1){
+                path.push(node.nodeName.toUpperCase()+sublingsName);
+            }
+            console.log(path)
+            return path;
+        }
+    })();
+    var a = interpreter(document.getElementById("box2"))
+    console.log(a);
+</script>
+</html>

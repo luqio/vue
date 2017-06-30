@@ -1,0 +1,123 @@
+
+@import "../base/iconfont.scss";
+
+.dialogue-window{
+    box-sizing: border-box;
+    &.qwindow.show{
+        transition: transform 0.2s 0.04s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.2s 0.04s ease-in-out, visibility 0.24s;
+    }
+    &.qwindow_mask.show{
+        opacity: 0.5;
+    } 
+    * {
+        box-sizing: border-box;
+    }
+}
+
+.dialogue-window{
+    .winbg {
+        visibility: hidden;
+    }
+    .winbox {
+        border-radius: 3px;
+        border: solid 1px #CCC;
+        border-width: 0px;
+        border-width: 1px\9;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+        overflow: hidden;
+    } 
+    .winhead {
+        .winclose {
+            background: transparent;
+            @extend .yk-icon-base-pseudo;
+            font-size: 18px;
+            color: #909090;
+            font-weight: normal;
+            top: 18px;
+            right: 10px;
+        }
+        .wintitle {
+            height: 58px;
+            *height: 18px;
+            font-size: 18px;
+            color: #333;
+            border: 0;
+            line-height:20px;
+            padding: 20px;
+            font-weight: normal;
+        }
+    }
+    .winbody {
+        
+    }
+      
+}
+.dialogue-window--simple{
+    @extend .dialogue-window;
+    .dialogue-window__content{
+        padding: 0px 20px 20px 20px;
+    }
+    .dialogue-window__footer{
+        padding: 0px 20px 20px 20px;
+    }
+}
+
+//有分隔线的header+content+footer
+.dialogue-window--simple__cutoff{
+    @extend .dialogue-window;
+    .winhead {
+        .wintitle{
+            border-bottom: 1px solid #eee;
+        }
+    }
+    .winbody{
+        .dialogue-window__content{
+        padding: 0px 20px 20px 20px;
+        }
+        .dialogue-window__footer{
+            padding: 20px 20px 20px 20px;
+            border-top: 1px solid #eee;
+        }
+    }  
+}
+
+//有分隔线的header+content+footer
+.dialogue-window--notice{
+    @extend .dialogue-window;
+    .winbody{
+        padding: 60px 40px 40px 40px;
+        text-align: center;
+    }
+}
+
+.dialogue-window--notice__detail{
+    @extend .dialogue-window;
+    .winbody{
+        padding: 60px 40px 40px 40px;
+        text-align: center;
+        .dialogue-window__contentImg{
+            margin-bottom:20px;
+        }
+       .dialogue-window__contentText{
+            margin-bottom:30px;
+       }
+       .dialogue-window__contentBtn{
+        
+       }
+    } 
+}
+
+.dialogue-window--notice__full{
+    @extend .dialogue-window;
+    .winbody{
+        padding: 0px 0px 40px 0px;
+        text-align: center;
+        .dialogue-window__contentImg{
+            margin-bottom:20px;
+        }
+       .dialogue-window__contentText{
+            margin-bottom:30px;
+       }
+    } 
+}
+

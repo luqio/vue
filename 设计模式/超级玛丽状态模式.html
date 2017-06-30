@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+</body>
+<script type="text/javascript">
+//状态模式既是 程序汇总臃肿的分支判断语句问题，将每个分支转化为一种状态独立出来，方便每种状态的管理，又不至于每次执行时遍历所有分支。
+var MarryState = function(){
+    var __currentState={};
+    state = {
+        jump: function(){},
+        mover: function(){},
+        shoot: function(){},
+        squat: function(){
+            //蹲下
+        }
+    };
+    //动作控制类
+    var Action = {
+        changeState: function(){
+            var arg = arguments;
+            __currentState = {};
+            if(arg.length){
+                for(var i=0 ,len=arg.length; i<len; i++){
+                    __currentState[arg[i]] = true;
+                }
+            }
+            return this;
+        },
+        go: function(){
+            for(var i in __currentState){
+                state[i] &&state[i]();
+            }
+            return this;
+        }
+    }
+    return {
+        changeState: ,
+        go: 
+    }
+}
+</script>
+
+</script>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+</head>
+<body>
+</body>
+<script type="text/javascript">
+
+var mix = function(){
+  var i=1, len=argument.length, target = arguments[0], arg;
+  for(;i<len;i++){
+     arg = arguments[i];
+     for(var prototype in arg){
+        Target[prototype] = arg[prototype];
+     }
+  }
+  return target;
+}
+var mix = function(){
+      Var i=1, len=argument.length, target = arguments[0], arg;
+      For(;i<len;i++){
+         Arg = arguments[i];
+         For(var prototype in arg){
+            If(typeof arg[prototype] === “object”){
+                Target[prototype] = arg[prototype].constructor===”Array”?[]:{};
+                mix(Target[prototype],arg[prototype]);
+            }else{
+               Target[prototype] = arg[prototype];
+            }
+         }
+      }
+      Return target;
+   }
+
+
+var _mix = function(r, s) {
+    for (var p in s) {
+        if (s.hasOwnProperty(p)) {
+            r[p] = s[p]
+        }
+    }
+}
+var _extend = function() {
+        //开关 用来使生成原型时,不调用真正的构成流程init
+        this.initPrototype = true
+        var prototype = new this()
+        this.initPrototype = false
+        var items = Array.prototype.slice.call(arguments) || []
+        var item
+        //支持混入多个属性，并且支持{}也支持 Function
+        while (item = items.shift()) {
+            _mix(prototype, item.prototype || item)
+        }
+        // 这边是返回的类，其实就是我们返回的子类
+        function SubClass() {
+            if (!SubClass.initPrototype && this.init)
+                this.init.apply(this, arguments) //调用init真正的构造函数
+        }
+        // 赋值原型链，完成继承
+        SubClass.prototype = prototype
+            // 改变constructor引用
+        SubClass.prototype.constructor = SubClass
+            // 为子类也添加extend方法
+        SubClass.extend = _extend
+        return SubClass
+    }
+
+    
+jQuery.extend = jQuery.fn.extend = function() {
+    var options, name, src, copy, copyIsArray, clone,
+        target = arguments[ 0 ] || {},
+        i = 1,
+        length = arguments.length,
+        deep = false;
+
+    // Handle a deep copy situation
+    if ( typeof target === "boolean" ) {
+        deep = target;
+
+        // Skip the boolean and the target
+        target = arguments[ i ] || {};
+        i++;
+    }
+
+    // Handle case when target is a string or something (possible in deep copy)
+    if ( typeof target !== "object" && !jQuery.isFunction( target ) ) {
+        target = {};
+    }
+
+    // Extend jQuery itself if only one argument is passed
+    if ( i === length ) {
+        target = this;
+        i--;
+    }
+
+    for ( ; i < length; i++ ) {
+
+        // Only deal with non-null/undefined values
+        if ( ( options = arguments[ i ] ) != null ) {
+
+            // Extend the base object
+            for ( name in options ) {
+                src = target[ name ];
+                copy = options[ name ];
+
+                // Prevent never-ending loop
+                if ( target === copy ) {
+                    continue;
+                }
+
+                // Recurse if we're merging plain objects or arrays
+                if ( deep && copy && ( jQuery.isPlainObject( copy ) ||
+                    ( copyIsArray = jQuery.isArray( copy ) ) ) ) {
+
+                    if ( copyIsArray ) {
+                        copyIsArray = false;
+                        clone = src && jQuery.isArray( src ) ? src : [];
+
+                    } else {
+                        clone = src && jQuery.isPlainObject( src ) ? src : {};
+                    }
+
+                    // Never move original objects, clone them
+                    target[ name ] = jQuery.extend( deep, clone, copy );
+
+                // Don't bring in undefined values
+                } else if ( copy !== undefined ) {
+                    target[ name ] = copy;
+                }
+            }
+        }
+    }
+
+    // Return the modified object
+    return target;
+};
+</script>
+</html>
